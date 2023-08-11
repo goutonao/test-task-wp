@@ -1,0 +1,24 @@
+- block:
+
+  - name: Create service config
+    template:
+      src: systemd.j2
+      dest: "/etc/systemd/system/docker-compose.service"
+      owner: "root"
+      group: "root"
+      mode: 0644
+    register: systemd_service_status
+
+  - name: enable 'docker-compose' service
+    systemd:
+      name: 'docker-compose'
+      state: restarted
+      daemon_reload: yes
+      enabled: yes
+
+#  - name: restart 'docker-compose'
+#    systemd:
+#      name: 'docker-compose'
+#      state: restarted
+#    when: ansible_play_name != 'services_disable'
+

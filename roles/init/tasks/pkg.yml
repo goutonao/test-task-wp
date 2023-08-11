@@ -1,0 +1,18 @@
+- block:
+
+  - name: Install required system packages
+    become: yes
+    apt:
+      pkg:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+        - python3-pip
+        - virtualenv
+        - python3-setuptools
+        - docker.io
+        - docker-compose
+        - rsync
+      state: latest
+      update_cache: true

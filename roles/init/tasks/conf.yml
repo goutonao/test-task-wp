@@ -1,0 +1,78 @@
+- block:
+
+  - name: Create a directory for config
+    ansible.builtin.file:
+      path: /data
+      state: directory
+      mode: '0755'
+
+  - name: Create a directory for config
+    ansible.builtin.file:
+      path: /data/docker
+      state: directory
+      mode: '0755'
+  - name: Create a directory for config
+    ansible.builtin.file:
+      path: /data/docker/compose
+      state: directory
+      mode: '0755'
+
+
+  - name: Create a directory for config
+    ansible.builtin.file:
+      path: /data/nginx
+      state: directory
+      mode: '0755'
+  - name: Create a directory for config
+    ansible.builtin.file:
+      path: /data/nginx/conf
+      state: directory
+      mode: '0755'
+
+  - name: Create a directory for config
+    ansible.builtin.file:
+      path: /data/prometheus
+      state: directory
+      mode: '0755'
+  - name: Create a directory for config
+    ansible.builtin.file:
+      path: /data/prometheus/conf
+      state: directory
+      mode: '0755'
+
+  - name: Copy docker compose config
+    ansible.builtin.copy:
+      src: files/docker-compose.yml
+      dest: /data/docker/compose
+      owner: root
+      group: root
+      mode: '0644'
+
+  - name: Copy config
+    copy:
+      src: files/prometheus
+      dest: /data
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Copy config
+    copy:
+      src: files/nginx
+      dest: /data
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Copy config
+    copy:
+      src: files/grafana
+      dest: /data
+      owner: root
+      group: root
+      mode: 0644
+
+#  - synchronize:
+#      src: files/prometheus/conf
+#      dest: /data/prometheus/conf
+#    delegate_to: "{{ inventory_hostname }}"

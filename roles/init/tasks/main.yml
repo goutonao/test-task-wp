@@ -1,0 +1,6 @@
+- include_tasks: pkg.yml
+
+- include_tasks: conf.yml
+
+- include_tasks: systemd.yml
+
